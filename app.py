@@ -1,19 +1,23 @@
 import streamlit as st
 import pandas as pd
-import numpy as np
 import json as json
 import requests
 import plotly.express as px
 
 def main():
    
-    st.title('TDI Milestone: Stock Ticker Plotter App')
-    st.text('A simple app to plot monthly closing prices for a selected stock.')
+    st.title('TDI Milestone: Stock Ticker Plotter')
+    st.markdown('A simple app to plot monthly closing prices for a selected stock.')
 
     
     
-    st.sidebar.title('Select stock')
-    ticker = st.sidebar.text_input("Ticker (e.g. IBM):", "")
+    
+    with st.sidebar:
+        st.title('Select stock')
+        link = '[List of all stock symbols](https://stockanalysis.com/stocks/)'
+        st.markdown(link, unsafe_allow_html=True)   
+        ticker = st.text_input("Stock Symbol (e.g. IBM):")
+    
     Year = []
     Month = []
         
