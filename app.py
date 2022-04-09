@@ -13,7 +13,7 @@ def main():
     
     
     with st.sidebar:
-        st.title('Select stock')
+        st.title('Select')
         link = '[List of all stock symbols](https://stockanalysis.com/stocks/)'
         st.markdown(link, unsafe_allow_html=True)   
         ticker = st.text_input("Stock Symbol (e.g. IBM):")
@@ -24,7 +24,8 @@ def main():
     if ticker != "":        
         df = load_data(ticker)     
         Year=sorted(df['Year'].unique())
-        Month=sorted(df['Month'].unique())
+        Month=['January', 'February', 'March', 'April', 'May', 'June', 'July', 
+               'August', 'September', 'October', 'November', 'December']
         selectedyear = st.sidebar.selectbox("Year", Year)
         selectedmonth = st.sidebar.selectbox("Month", Month)
         chosendf = df[(df['Year']==selectedyear) & (df['Month']==selectedmonth)]
