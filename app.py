@@ -21,16 +21,20 @@ def main():
     Year = []
     Month = []
         
-    if ticker != "":        
-        df = load_data(ticker)     
-        Year=sorted(df['Year'].unique())
-        Month=['January', 'February', 'March', 'April', 'May', 'June', 'July', 
-               'August', 'September', 'October', 'November', 'December']
-        selectedyear = st.sidebar.selectbox("Year", Year)
-        selectedmonth = st.sidebar.selectbox("Month", Month)
-        chosendf = df[(df['Year']==selectedyear) & (df['Month']==selectedmonth)]
-        fig = px.line(chosendf, x="date", y="close", title= ticker,markers=True)
-        st.plotly_chart(fig, use_container_width=True)    
+    if ticker != "":
+        try:        
+            df = load_data(ticker)     
+            Year=sorted(df['Year'].unique())
+            Month=['January', 'February', 'March', 'April', 'May', 'June', 'July', 
+                   'August', 'September', 'October', 'November', 'December']
+            selectedyear = st.sidebar.selectbox("Year", Year)
+            selectedmonth = st.sidebar.selectbox("Month", Month)
+            chosendf = df[(df['Year']==selectedyear) & (df['Month']==selectedmonth)]
+            fig = px.line(chosendf, x="date", y="close", title= ticker,markers=True)
+            st.plotly_chart(fig, use_container_width=True)
+        except KeyError:
+            st.write('Can not find the selected stock symbol. Please make sure the selected stock is correct.')
+                  
     else:
         pass
   
